@@ -156,10 +156,72 @@ void Task40()
     */
     int size = GetSizeArray();
     int[] array = new int[size];
-    array = GetRandomArray(size, 0, 100);
-    Console.WriteLine("[" + String.Join(", ", array) + "]");
-
-
+    array = GetRandomArray(size, 0, 10);
+    //Console.WriteLine("[" + String.Join(", ", array) + "]");
+    int GetEvenValue(int[] array) {
+        int even = 0;
+        for (int i = 0; i < array.Length; i++) {
+            if (array[i] % 2 == 0) even++; 
+        }
+        return even;
+    }
+    int[] evenArray = new int[GetEvenValue(array)];
+    //Console.WriteLine("[" + String.Join(", ", evenArray) + "]");
+    int GetOddValue(int[] array) {
+        int odd = 0;
+        for (int j = 0; j < array.Length; j++) {
+            if (array[j] % 2 > 0) odd++;
+        }
+        return odd;
+    }
+    int[] oddArray = new int[GetOddValue(array)];
+    //Console.WriteLine("[" + String.Join(", ", oddArray) + "]");
+    int[] GetEvenNumber(int[] evenArray, int[] array) {
+        int indexEven = 0;
+        for (int i = 0; i < array.Length; i++) {
+            if (array[i] % 2 == 0) {
+                evenArray[indexEven] = array[i];
+                indexEven++;
+            } 
+        }
+        return evenArray;
+    }
+    int[] GetOddNumber(int[] oddArray, int[] array) {
+        int indexOdd = 0;
+        for (int i = 0; i < array.Length; i++) {
+            if (array[i] % 2 > 0) {
+                oddArray[indexOdd] = array[i];
+                indexOdd++;
+            } 
+        }
+        return oddArray;
+    }
+    evenArray = GetEvenNumber(evenArray, array);
+    oddArray = GetOddNumber(oddArray, array);
+    //Console.WriteLine("[" + String.Join(", ", evenArray) + "]");
+    //Console.WriteLine("[" + String.Join(", ", oddArray) + "]");
+    int AveregeArithmetic(int[] array) {
+        int averege = 0;
+        for (int i = 0; i < array.Length; i++) {
+            averege = averege + array[i];
+        }
+        averege = averege / array.Length;
+        return averege;
+    }
+    int arrayEven = AveregeArithmetic(evenArray);
+    int arrayOdd = AveregeArithmetic(oddArray);
+    //Console.WriteLine($"средн. арифм. значений элементов массива с чётными числами {arrayEven}");
+    //Console.WriteLine($"средн. арифм. массива значений элементов с нечётными числами {arrayOdd}");
+    void Comparison() {
+        if (arrayEven > arrayOdd) {
+            Console.WriteLine("средн. арифм. значений элементов массива с чётными числами > средн. арифм. значений элементов с нечётными числами");
+        } else if (arrayOdd > arrayEven) {
+            Console.WriteLine("средн. арифм. массива значений элементов с нечётными числами > средн. арифм. значений элементов с чётными числами");
+        } else if (arrayEven == arrayOdd) {
+            Console.WriteLine("средн. арифм. значений элементов массива с нечётными числами = средн. арифм. значений элементов с чётными числами");
+        }
+    }
+    Comparison();
 }
 
 void Task42()
