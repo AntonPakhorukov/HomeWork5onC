@@ -19,6 +19,14 @@
 [1,2,3,4] -> средн. арифм. значений элементов массива с чётными числами > средн. арифм. значений элементов с нечётными числами
 [2,3,5,7] -> средн. арифм. массива значений элементов с нечётными числами > средн. арифм. значений элементов с чётными числами
 [1,2,5,4] -> средн. арифм. значений элементов массива с нечётными числами = средн. арифм. значений элементов с чётными числами
+
+Дополнительная задача (42): Задайте одномерный массив из N элементов, заполненный случайными числами. 
+Необходимо определить, в какой последовательности заданы элементы массива: 
+по возрастанию, по убыванию, хаотично, или все элементы одинаковы.
+[1,2,3,4] -> по возрастанию
+[4,3,2,1] -> по убыванию
+[4,2,3,1] -> хаотично
+[1,1,1,1] -> все элементы равны
 */
 Console.Clear();
 int[] GetRandomArray(int size, int min, int max)
@@ -158,41 +166,49 @@ void Task40()
     int[] array = new int[size];
     array = GetRandomArray(size, 0, 10);
     //Console.WriteLine("[" + String.Join(", ", array) + "]");
-    int GetEvenValue(int[] array) {
+    int GetEvenValue(int[] array)
+    {
         int even = 0;
-        for (int i = 0; i < array.Length; i++) {
-            if (array[i] % 2 == 0) even++; 
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i] % 2 == 0) even++;
         }
         return even;
     }
     int[] evenArray = new int[GetEvenValue(array)];
-    //Console.WriteLine("[" + String.Join(", ", evenArray) + "]");
-    int GetOddValue(int[] array) {
+    int GetOddValue(int[] array)
+    {
         int odd = 0;
-        for (int j = 0; j < array.Length; j++) {
+        for (int j = 0; j < array.Length; j++)
+        {
             if (array[j] % 2 > 0) odd++;
         }
         return odd;
     }
     int[] oddArray = new int[GetOddValue(array)];
-    //Console.WriteLine("[" + String.Join(", ", oddArray) + "]");
-    int[] GetEvenNumber(int[] evenArray, int[] array) {
+    int[] GetEvenNumber(int[] evenArray, int[] array)
+    {
         int indexEven = 0;
-        for (int i = 0; i < array.Length; i++) {
-            if (array[i] % 2 == 0) {
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i] % 2 == 0)
+            {
                 evenArray[indexEven] = array[i];
                 indexEven++;
-            } 
+            }
         }
         return evenArray;
     }
-    int[] GetOddNumber(int[] oddArray, int[] array) {
+    int[] GetOddNumber(int[] oddArray, int[] array)
+    {
         int indexOdd = 0;
-        for (int i = 0; i < array.Length; i++) {
-            if (array[i] % 2 > 0) {
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i] % 2 > 0)
+            {
                 oddArray[indexOdd] = array[i];
                 indexOdd++;
-            } 
+            }
         }
         return oddArray;
     }
@@ -200,9 +216,11 @@ void Task40()
     oddArray = GetOddNumber(oddArray, array);
     //Console.WriteLine("[" + String.Join(", ", evenArray) + "]");
     //Console.WriteLine("[" + String.Join(", ", oddArray) + "]");
-    int AveregeArithmetic(int[] array) {
+    int AveregeArithmetic(int[] array)
+    {
         int averege = 0;
-        for (int i = 0; i < array.Length; i++) {
+        for (int i = 0; i < array.Length; i++)
+        {
             averege = averege + array[i];
         }
         averege = averege / array.Length;
@@ -212,22 +230,196 @@ void Task40()
     int arrayOdd = AveregeArithmetic(oddArray);
     //Console.WriteLine($"средн. арифм. значений элементов массива с чётными числами {arrayEven}");
     //Console.WriteLine($"средн. арифм. массива значений элементов с нечётными числами {arrayOdd}");
-    void Comparison() {
-        if (arrayEven > arrayOdd) {
+    void Comparison()
+    {
+        if (arrayEven > arrayOdd)
+        {
             Console.WriteLine("средн. арифм. значений элементов массива с чётными числами > средн. арифм. значений элементов с нечётными числами");
-        } else if (arrayOdd > arrayEven) {
+        }
+        else if (arrayOdd > arrayEven)
+        {
             Console.WriteLine("средн. арифм. массива значений элементов с нечётными числами > средн. арифм. значений элементов с чётными числами");
-        } else if (arrayEven == arrayOdd) {
+        }
+        else if (arrayEven == arrayOdd)
+        {
             Console.WriteLine("средн. арифм. значений элементов массива с нечётными числами = средн. арифм. значений элементов с чётными числами");
         }
     }
     Comparison();
 }
-
 void Task42()
 {
     /*
-
+    Задайте одномерный массив из N элементов, заполненный случайными числами. 
+    Необходимо определить, в какой последовательности заданы элементы массива: 
+    по возрастанию, по убыванию, хаотично, или все элементы одинаковы.
+    [1,2,3,4] -> по возрастанию
+    [4,3,2,1] -> по убыванию
+    [4,2,3,1] -> хаотично
+    [1,1,1,1] -> все элементы равны
     */
+    Console.WriteLine("Хотите задать массив рандомно(1) или задать массив вручную(2) ?");
+    int number = Convert.ToInt32(Console.ReadLine());
+    if (number == 1)
+    {
+        Way1();
+    }
+    else if (number == 2)
+    {
+        Way2();
+    }
+    void Way1()
+    {
+        int size = GetSizeArray();
+        int[] array = new int[size];
+        array = GetRandomArray(size, 0, 10);
+        Console.Clear();
+        Console.WriteLine("[" + String.Join(", ", array) + "]");
+        bool GetEqual(int[] array)
+        { // все элементы равны
+            int x = array[0];
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (x != array[i])
+                {
+                    return false;
+                }
 
+            }
+            return true;
+        }
+        bool GetIncrease(int[] array)
+        { //по возрастанию
+            int x = array[0];
+            int y = array.Length;
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (x < array[i])
+                {
+                    x = array[i];
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        bool GetDescending(int[] array)
+        { //по убыванию
+            int x = array[0];
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (x > array[i])
+                {
+                    x = array[i];
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        void GetResult()
+        {
+            if (GetEqual(array) == true)
+            {
+                Console.WriteLine("Все элементы равны");
+            }
+            else if (GetIncrease(array) == true)
+            {
+                Console.WriteLine("По возрастанию");
+            }
+            else if (GetDescending(array) == true)
+            {
+                Console.WriteLine("По убыванию");
+            }
+            else
+            {
+                Console.WriteLine("Хаотично");
+            }
+        }
+        GetResult();
+    }
+}
+void Way2()
+{
+    int size = GetSizeArray();
+    int[] array = new int[size];
+    void GetArray(int[] array) {
+        for (int i = 0; i < array.Length; i++) {
+            Console.Write($"Введите число в ячейку массива {i}: ");
+            array[i] = Convert.ToInt32(Console.ReadLine());
+        }        
+    }
+    GetArray(array);
+    Console.Clear();
+    Console.WriteLine("[" + String.Join(", ", array) + "]");
+    bool GetEqual(int[] array)
+    { // все элементы равны
+        int x = array[0];
+        for (int i = 1; i < array.Length; i++)
+        {
+            if (x != array[i])
+            {
+                return false;
+            }
+
+        }
+        return true;
+    }
+    bool GetIncrease(int[] array)
+    { //по возрастанию
+        int x = array[0];
+        int y = array.Length;
+        for (int i = 1; i < array.Length; i++)
+        {
+            if (x < array[i])
+            {
+                x = array[i];
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    bool GetDescending(int[] array)
+    { //по убыванию
+        int x = array[0];
+        for (int i = 1; i < array.Length; i++)
+        {
+            if (x > array[i])
+            {
+                x = array[i];
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    void GetResult()
+    {
+        if (GetEqual(array) == true)
+        {
+            Console.WriteLine("Все элементы равны");
+        }
+        else if (GetIncrease(array) == true)
+        {
+            Console.WriteLine("По возрастанию");
+        }
+        else if (GetDescending(array) == true)
+        {
+            Console.WriteLine("По убыванию");
+        }
+        else
+        {
+            Console.WriteLine("Хаотично");
+        }
+    }
+    GetResult();
 }
